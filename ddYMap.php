@@ -49,7 +49,10 @@ if (!empty($geoPos)){
 		//путь иконки на сервере
 		$icon = ltrim($icon, '/');
 		
-		if (file_exists($icon)){
+		//Пытаемся открыть файл
+		$iconHandle = @fopen($icon, 'r');
+		
+		if ($iconHandle){
 			//Получим её размеры
 			$iconSize = getimagesize($icon);
 			
@@ -67,6 +70,8 @@ if (!empty($geoPos)){
 				iconImageSize: ['.$iconSize[0].', '.$iconSize[1].'],
 				iconImageOffset: ['.$resultIconOffset[0].', '.$resultIconOffset[1].']
 			}';
+			
+			fclose($iconHandle);
 		}
 	}
 	
