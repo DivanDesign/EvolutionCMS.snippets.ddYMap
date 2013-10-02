@@ -3,20 +3,20 @@
  * ddYMap.php
  * @version 1.1 (2013-07-16)
  *
- * @desc Выводит Яндекс.Карту на страницу.
+ * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
- * @uses Сниппет ddGetDocumentField 2.4 (если координаты нужно получать, см. $getField).
+ * @uses The snippet ddGetDocumentField 2.4 (if position getting from another field is required, see $geoPos).
  * 
- * @note Внимание! На странице уже должен быть подключен jQuery.
- * @note Из пары параметров coords / getField необходимо передавать лишь один.
+ * @note Attention! The jQuery library should be included on the page.
+ * @note From the pair of field/getField parameters one is required.
  * 
- * @param $geoPos {comma separated string} - Координаты на карте (Долгота и Широта, перечисленные через запятую). По умолчанию: ''.
- * @param $getField {string} - Имя поля документа, содержащего координаты, значение которого необходимо получить.
- * @param $getId {integer} - ID документа, значение поля которого нужно получить. По умолчанию: текущий документ.
- * @param $mapElementId {string} - ID контейнера, где будет находиться Яндекс.Карта. По умолчанию: 'map'.
- * @param $icon {string} - Изображение иконки для метки на карте. По умолчанию: без иконки (используется стандартная).
- * @param $iconOffset {comma separated string} - Смещение иконки в пикселях относительно базового положения, задается в виде пары чисел, разделенных запятой (x, y). Базовое положение: иконка располагается горизонтально по центру точки ($geoPos), вертикально — над точкой.
- * @param $scrollZoom {0; 1} - Разрешёно ли изменение масштаба карты колесом мыши? По умолчанию: 0.
+ * @param $geoPos {comma separated string} - Comma separated longitude and latitude. @required
+ * @param $getField {string} - A field name with position that is required to be got.
+ * @param $getId {integer} - Document ID with a field value needed to be received. Default: current document.
+ * @param $mapElementId {string} - Container ID which the map is required to be embed in. Default: 'map'.
+ * @param $icon {string} - An icon to use (relative address). Default: without (default icon).
+ * @param $iconOffset {comma separated string} - An offset of the icon in pixels (x, y).Basic position: the icon is horizontally centered with respect to x and its bottom position is y. Default: '0,0'.
+ * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
  * 
  * @link http://code.divandesign.biz/modx/ddymap/1.1
  *
@@ -76,6 +76,6 @@ if (!empty($geoPos)){
 	$inlineScript .= '});});';
 	
 	//Подключаем инлайн-скрипт с инициализацией
-	$modx->regClientStartupScript('<script type="text/javascript">'.$inlineScript.'</script>', array('name' => '$.ddYMap.inline', 'version' => '1.0', 'plaintext' => true));
+	$modx->regClientStartupScript('<script type="text/javascript">'.$inlineScript.'</script>', array('plaintext' => true));
 }
 ?>
