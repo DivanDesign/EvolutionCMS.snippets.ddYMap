@@ -42,7 +42,7 @@ if (!empty($geoPos)){
 	$modx->regClientStartupScript('assets/js/jquery.ddYMap-1.0.min.js', array('name' => '$.ddYMap', 'version' => '1.0'));
 	
 	//Инлайн-скрипт инициализации
-	$inlineScript = '$(function(){$.ddYMap.init({elementId: "'.$mapElementId.'", latLng: new Array('.$geoPos.')';
+	$inlineScript = '(function($){$(function(){$.ddYMap.init({elementId: "'.$mapElementId.'", latLng: new Array('.$geoPos.')';
 	
 	//Если иконка задана
 	if (!empty($icon)){
@@ -73,7 +73,7 @@ if (!empty($geoPos)){
 	//Если нужен скролл колесом мыши, упомянем об этом
 	if (isset($scrollZoom) && $scrollZoom == 1){$inlineScript .= ', scrollZoom: true';}
 	
-	$inlineScript .= '});});';
+	$inlineScript .= '});});})(jQuery);';
 	
 	//Подключаем инлайн-скрипт с инициализацией
 	$modx->regClientStartupScript('<script type="text/javascript">'.$inlineScript.'</script>', array('plaintext' => true));
