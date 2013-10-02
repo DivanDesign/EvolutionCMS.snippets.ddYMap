@@ -1,7 +1,7 @@
 <?php
 /**
  * ddYMap.php
- * @version 1.1 (2013-07-16)
+ * @version 1.1.1 (2013-10-02)
  *
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
@@ -18,7 +18,7 @@
  * @param $iconOffset {comma separated string} - An offset of the icon in pixels (x, y).Basic position: the icon is horizontally centered with respect to x and its bottom position is y. Default: '0,0'.
  * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
  * 
- * @link http://code.divandesign.biz/modx/ddymap/1.1
+ * @link http://code.divandesign.biz/modx/ddymap/1.1.1
  *
  * @copyright 2013, DivanDesign
  * http://www.DivanDesign.biz
