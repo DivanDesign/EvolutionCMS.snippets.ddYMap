@@ -2,13 +2,13 @@
 /**
  * ddYMap.php
  * @version 1.1.1 (2013-10-02)
- *
+ * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
- * @uses The snippet ddGetDocumentField 2.4 (if position getting from another field is required, see $geoPos).
+ * @uses The library modx.ddTools 0.11 (if position getting from another field is required, see “$getField” and “$getId”).
  * 
  * @note Attention! The jQuery library should be included on the page.
- * @note From the pair of field/getField parameters one is required.
+ * @note From the pair of “$field” / “$getField” parameters one is required.
  * 
  * @param $geoPos {comma separated string} - Comma separated longitude and latitude. @required
  * @param $getField {string} - A field name with position that is required to be got.
@@ -19,17 +19,18 @@
  * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
  * 
  * @link http://code.divandesign.biz/modx/ddymap/1.1.1
- *
+ * 
  * @copyright 2013, DivanDesign
  * http://www.DivanDesign.biz
  */
 
 //Если задано имя поля, которое необходимо получить
 if (isset($getField)){
-	$geoPos = $modx->runSnippet('ddGetDocumentField', array(
-		'id' => $getId,
-		'field' => $getField
-	));
+	//Подключаем modx.ddTools
+	require_once $modx->getConfig('base_path').'assets/snippets/ddTools/modx.ddtools.class.php';
+	
+	$geoPos = ddTools::getTemplateVarOutput(array($getField), $getId);
+	$geoPos = $string[$getField];
 }
 
 //Если координаты заданы и не пустые
