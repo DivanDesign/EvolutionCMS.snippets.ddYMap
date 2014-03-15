@@ -39,7 +39,7 @@ if (!empty($geoPos)){
 	//Подключаем библиотеку карт
 	$modx->regClientStartupScript('http://api-maps.yandex.ru/2.0-stable/?load=package.standard&amp;lang=ru-RU', array('name' => 'api-maps.yandex.ru', 'version' => '2.0-stable'));
 	//Подключаем $.ddYMap
-	$modx->regClientStartupScript('assets/js/jquery.ddYMap-1.0.min.js', array('name' => '$.ddYMap', 'version' => '1.0'));
+	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.0.min.js', array('name' => '$.ddYMap', 'version' => '1.0'));
 	
 	//Инлайн-скрипт инициализации
 	$inlineScript = '(function($){$(function(){$.ddYMap.init({elementId: "'.$mapElementId.'", latLng: new Array('.$geoPos.')';
