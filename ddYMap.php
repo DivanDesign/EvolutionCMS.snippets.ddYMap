@@ -13,7 +13,7 @@
  * @param $geoPos {comma separated string} - Comma separated longitude and latitude. @required
  * @param $getField {string} - A field name with position that is required to be got.
  * @param $getId {integer} - Document ID with a field value needed to be received. Default: current document.
- * @param $mapElementId {string} - Container ID which the map is required to be embed in. Default: 'map'.
+ * @param $mapElement {string} - Container selector which the map is required to be embed in. Default: '#map'.
  * @param $icon {string} - An icon to use (relative address). Default: without (default icon).
  * @param $iconOffset {comma separated string} - An offset of the icon in pixels (x, y).Basic position: the icon is horizontally centered with respect to x and its bottom position is y. Default: '0,0'.
  * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
@@ -35,15 +35,15 @@ if (isset($getField)){
 
 //Если координаты заданы и не пустые
 if (!empty($geoPos)){
-	$mapElementId = isset($mapElementId) ? $mapElementId : 'map';
+	$mapElement = isset($mapElement) ? $mapElement : '#map';
 	
 	//Подключаем библиотеку карт
 	$modx->regClientStartupScript('http://api-maps.yandex.ru/2.0-stable/?load=package.standard&amp;lang=ru-RU', array('name' => 'api-maps.yandex.ru', 'version' => '2.0-stable'));
 	//Подключаем $.ddYMap
-	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.0.min.js', array('name' => '$.ddYMap', 'version' => '1.0'));
+	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.1.min.js', array('name' => '$.ddYMap', 'version' => '1.1'));
 	
 	//Инлайн-скрипт инициализации
-	$inlineScript = '(function($){$(function(){$.ddYMap.init({elementId: "'.$mapElementId.'", latLng: new Array('.$geoPos.')';
+	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({latLng: new Array('.$geoPos.')';
 	
 	//Если иконка задана
 	if (!empty($icon)){
