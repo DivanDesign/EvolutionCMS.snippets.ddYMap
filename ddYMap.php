@@ -1,7 +1,7 @@
 <?php
 /**
  * ddYMap.php
- * @version 1.1.1 (2013-10-02)
+ * @version 1.2 (2014-03-16)
  * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
@@ -20,9 +20,9 @@
  * @param $iconOffset {comma separated string} - An offset of the icon in pixels (x, y).Basic position: the icon is horizontally centered with respect to x and its bottom position is y. Default: '0,0'.
  * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
  * 
- * @link http://code.divandesign.biz/modx/ddymap/1.1.1
+ * @link http://code.divandesign.biz/modx/ddymap/1.2
  * 
- * @copyright 2013, DivanDesign
+ * @copyright 2014, DivanDesign
  * http://www.DivanDesign.biz
  */
 
@@ -46,14 +46,6 @@ if (!empty($geoPos)){
 	
 	//Инлайн-скрипт инициализации
 	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({latLng: new Array('.$geoPos.')';
-	
-	if (!empty($defaultType)){
-		$inlineScript .= ', defaultType: "'.$defaultType.'"';
-	}
-	
-	if (!empty($defaultZoom)){
-		$inlineScript .= ', zoom: '.$defaultZoom;
-	}
 	
 	//Если иконка задана
 	if (!empty($icon)){
@@ -88,6 +80,10 @@ if (!empty($geoPos)){
 	
 	//Если нужен скролл колесом мыши, упомянем об этом
 	if (isset($scrollZoom) && $scrollZoom == 1){$inlineScript .= ', scrollZoom: true';}
+	//Тип карты по умолчанию
+	if (!empty($defaultType)){$inlineScript .= ', defaultType: "'.$defaultType.'"';}
+	//Масштаб карты по умолчанию
+	if (!empty($defaultZoom)){$inlineScript .= ', zoom: '.$defaultZoom;}
 	
 	$inlineScript .= '});});})(jQuery);';
 	
