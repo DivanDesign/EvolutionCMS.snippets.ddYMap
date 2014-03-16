@@ -79,7 +79,7 @@ if (!empty($geoPos)){
 			$inlineScript .= ', placemarkOptions: {
 				iconImageHref: "'.$icon.'",
 				iconImageSize: ['.$iconSize[0].', '.$iconSize[1].'],
-				iconImageOffset: ['.$resultIconOffset[0].', '.$resultIconOffset[1].']
+				iconImageOffset: ['.round($resultIconOffset[0]).', '.round($resultIconOffset[1]).']
 			}';
 			
 			fclose($iconHandle);
