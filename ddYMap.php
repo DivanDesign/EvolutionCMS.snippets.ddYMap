@@ -14,6 +14,7 @@
  * @param $getField {string} - A field name with position that is required to be got.
  * @param $getId {integer} - Document ID with a field value needed to be received. Default: current document.
  * @param $mapElement {string} - Container selector which the map is required to be embed in. Default: '#map'.
+ * @param $defaultType {'map'; 'satellite'; 'hybrid'; 'publicMap'; 'publicMapHybrid'} - Default map type: 'map' — schematic map, 'satellite' — satellite map, 'hybrid' — hybrid map, 'publicMap' — public map, 'publicMapHybrid' - hybrid public map. Default: 'map'.
  * @param $icon {string} - An icon to use (relative address). Default: without (default icon).
  * @param $iconOffset {comma separated string} - An offset of the icon in pixels (x, y).Basic position: the icon is horizontally centered with respect to x and its bottom position is y. Default: '0,0'.
  * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
@@ -44,6 +45,10 @@ if (!empty($geoPos)){
 	
 	//Инлайн-скрипт инициализации
 	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({latLng: new Array('.$geoPos.')';
+	
+	if (!empty($defaultType)){
+		$inlineScript .= ', defaultType: "'.$defaultType.'"';
+	}
 	
 	//Если иконка задана
 	if (!empty($icon)){
