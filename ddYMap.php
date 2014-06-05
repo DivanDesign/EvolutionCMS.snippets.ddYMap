@@ -1,7 +1,7 @@
 <?php
 /**
  * ddYMap.php
- * @version 1.2 (2014-03-16)
+ * @version 1.3 (2014-06-05)
  * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
@@ -19,8 +19,9 @@
  * @param $icon {string} - An icon to use (relative address). Default: without (default icon).
  * @param $iconOffset {comma separated string} - An offset of the icon in pixels (x, y).Basic position: the icon is horizontally centered with respect to x and its bottom position is y. Default: '0,0'.
  * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
+ * @param $mapCenterOffset {comma separated string} - Center offset of the map with respect to the center of the map container in pixels. Default: '0,0'.
  * 
- * @link http://code.divandesign.biz/modx/ddymap/1.2
+ * @link http://code.divandesign.biz/modx/ddymap/1.3
  * 
  * @copyright 2014, DivanDesign
  * http://www.DivanDesign.biz
@@ -42,7 +43,7 @@ if (!empty($geoPos)){
 	//Подключаем библиотеку карт
 	$modx->regClientStartupScript('http://api-maps.yandex.ru/2.0-stable/?load=package.standard&amp;lang=ru-RU', array('name' => 'api-maps.yandex.ru', 'version' => '2.0-stable'));
 	//Подключаем $.ddYMap
-	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.1.min.js', array('name' => '$.ddYMap', 'version' => '1.1'));
+	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.2.min.js', array('name' => '$.ddYMap', 'version' => '1.2'));
 	
 	//Инлайн-скрипт инициализации
 	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({latLng: new Array('.$geoPos.')';
@@ -84,6 +85,8 @@ if (!empty($geoPos)){
 	if (!empty($defaultType)){$inlineScript .= ', defaultType: "'.$defaultType.'"';}
 	//Масштаб карты по умолчанию
 	if (!empty($defaultZoom)){$inlineScript .= ', zoom: '.$defaultZoom;}
+	//Если указано смещение центра карты
+	if (isset($mapCenterOffset)){$inlineScript .= ', mapCenterOffset: new Array('.$mapCenterOffset.')';} 
 	
 	$inlineScript .= '});});})(jQuery);';
 	
