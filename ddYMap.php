@@ -5,14 +5,14 @@
  * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
- * @uses The library modx.ddTools 0.11 (if position getting from another field is required, see “$getField” and “$getId”).
+ * @uses The library modx.ddTools 0.12.
  * 
  * @note Attention! The jQuery library should be included on the page.
- * @note From the pair of “$field” / “$getField” parameters one is required.
+ * @note From the pair of “$field” / “$docField” parameters one is required.
  * 
  * @param $geoPos {comma separated string} - Comma separated longitude and latitude. @required
- * @param $getField {string} - A field name with position that is required to be got.
- * @param $getId {integer} - Document ID with a field value needed to be received. Default: current document.
+ * @param $docField {string} - A field name with position that is required to be got.
+ * @param $docId {integer} - Document ID with a field value needed to be received. Default: current document.
  * @param $mapElement {string} - Container selector which the map is required to be embed in. Default: '#map'.
  * @param $defaultType {'map'; 'satellite'; 'hybrid'; 'publicMap'; 'publicMapHybrid'} - Default map type: 'map' — schematic map, 'satellite' — satellite map, 'hybrid' — hybrid map, 'publicMap' — public map, 'publicMapHybrid' - hybrid public map. Default: 'map'.
  * @param $defaultZoom {integer} - Default map zoom. Default: 15.
@@ -27,13 +27,19 @@
  * http://www.DivanDesign.biz
  */
 
+//Подключаем modx.ddTools
+require_once $modx->getConfig('base_path').'assets/snippets/ddTools/modx.ddtools.class.php';
+
+//Для обратной совместимости
+extract(ddTools::verifyRenamedParams($params, array(
+	'docField' => 'getField',
+	'docId' => 'getId'
+)));
+
 //Если задано имя поля, которое необходимо получить
-if (isset($getField)){
-	//Подключаем modx.ddTools
-	require_once $modx->getConfig('base_path').'assets/snippets/ddTools/modx.ddtools.class.php';
-	
-	$geoPos = ddTools::getTemplateVarOutput(array($getField), $getId);
-	$geoPos = $string[$getField];
+if (isset($docField)){
+	$geoPos = ddTools::getTemplateVarOutput(array($docField), $docId);
+	$geoPos = $string[$docField];
 }
 
 //Если координаты заданы и не пустые
