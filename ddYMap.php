@@ -47,12 +47,12 @@ if (!empty($geoPos)){
 	$mapElement = isset($mapElement) ? $mapElement : '#map';
 	
 	//Подключаем библиотеку карт
-	$modx->regClientStartupScript('http://api-maps.yandex.ru/2.0-stable/?load=package.standard&amp;lang=ru-RU', array('name' => 'api-maps.yandex.ru', 'version' => '2.0-stable'));
+	$modx->regClientStartupScript('http://api-maps.yandex.ru/2.1/?lang=ru-RU', array('name' => 'api-maps.yandex.ru', 'version' => '2.1'));
 	//Подключаем $.ddYMap
-	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.2.min.js', array('name' => '$.ddYMap', 'version' => '1.2'));
+	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.3.min.js', array('name' => '$.ddYMap', 'version' => '1.3'));
 	
 	//Инлайн-скрипт инициализации
-	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({latLng: new Array('.$geoPos.')';
+	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({placemarks: new Array('.$geoPos.')';
 	
 	//Если иконка задана
 	if (!empty($icon)){
@@ -76,6 +76,7 @@ if (!empty($geoPos)){
 			}
 			//Позиционируем точку по центру иконки
 			$inlineScript .= ', placemarkOptions: {
+				iconLayout: "default#image",
 				iconImageHref: "'.$icon.'",
 				iconImageSize: ['.$iconSize[0].', '.$iconSize[1].'],
 				iconImageOffset: ['.round($resultIconOffset[0]).', '.round($resultIconOffset[1]).']
@@ -90,7 +91,7 @@ if (!empty($geoPos)){
 	//Тип карты по умолчанию
 	if (!empty($defaultType)){$inlineScript .= ', defaultType: "'.$defaultType.'"';}
 	//Масштаб карты по умолчанию
-	if (!empty($defaultZoom)){$inlineScript .= ', zoom: '.$defaultZoom;}
+	if (!empty($defaultZoom)){$inlineScript .= ', defaultZoom: '.$defaultZoom;}
 	//Если указано смещение центра карты
 	if (isset($mapCenterOffset)){$inlineScript .= ', mapCenterOffset: new Array('.$mapCenterOffset.')';} 
 	
