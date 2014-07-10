@@ -1,14 +1,14 @@
 <?php
 /**
  * ddYMap.php
- * @version 1.3 (2014-06-05)
+ * @version 1.4 (2014-07-10)
  * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
  * @uses The library modx.ddTools 0.12.
  * 
  * @note Attention! The jQuery library should be included on the page.
- * @note From the pair of “$field” / “$docField” parameters one is required.
+ * @note From the pair of “$geoPos” / “$docField” parameters one is required.
  * 
  * @param $geoPos {comma separated string} - Comma separated longitude and latitude. @required
  * @param $docField {string} - A field name with position that is required to be got.
@@ -21,7 +21,7 @@
  * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
  * @param $mapCenterOffset {comma separated string} - Center offset of the map with respect to the center of the map container in pixels. Default: '0,0'.
  * 
- * @link http://code.divandesign.biz/modx/ddymap/1.3
+ * @link http://code.divandesign.biz/modx/ddymap/1.4
  * 
  * @copyright 2014, DivanDesign
  * http://www.DivanDesign.biz
