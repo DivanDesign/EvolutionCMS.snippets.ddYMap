@@ -1,18 +1,18 @@
 <?php
 /**
  * ddYMap.php
- * @version 1.3 (2014-06-05)
+ * @version 1.4 (2014-07-10)
  * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
- * @uses The library modx.ddTools 0.11 (if position getting from another field is required, see “$getField” and “$getId”).
+ * @uses The library modx.ddTools 0.12.
  * 
  * @note Attention! The jQuery library should be included on the page.
- * @note From the pair of “$field” / “$getField” parameters one is required.
+ * @note From the pair of “$geoPos” / “$docField” parameters one is required.
  * 
  * @param $geoPos {comma separated string} - Comma separated longitude and latitude. @required
- * @param $getField {string} - A field name with position that is required to be got.
- * @param $getId {integer} - Document ID with a field value needed to be received. Default: current document.
+ * @param $docField {string} - A field name with position that is required to be got.
+ * @param $docId {integer} - Document ID with a field value needed to be received. Default: current document.
  * @param $mapElement {string} - Container selector which the map is required to be embed in. Default: '#map'.
  * @param $defaultType {'map'; 'satellite'; 'hybrid'; 'publicMap'; 'publicMapHybrid'} - Default map type: 'map' — schematic map, 'satellite' — satellite map, 'hybrid' — hybrid map, 'publicMap' — public map, 'publicMapHybrid' - hybrid public map. Default: 'map'.
  * @param $defaultZoom {integer} - Default map zoom. Default: 15.
@@ -21,19 +21,25 @@
  * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
  * @param $mapCenterOffset {comma separated string} - Center offset of the map with respect to the center of the map container in pixels. Default: '0,0'.
  * 
- * @link http://code.divandesign.biz/modx/ddymap/1.3
+ * @link http://code.divandesign.biz/modx/ddymap/1.4
  * 
  * @copyright 2014, DivanDesign
  * http://www.DivanDesign.biz
  */
 
+//Подключаем modx.ddTools
+require_once $modx->getConfig('base_path').'assets/snippets/ddTools/modx.ddtools.class.php';
+
+//Для обратной совместимости
+extract(ddTools::verifyRenamedParams($params, array(
+	'docField' => 'getField',
+	'docId' => 'getId'
+)));
+
 //Если задано имя поля, которое необходимо получить
-if (isset($getField)){
-	//Подключаем modx.ddTools
-	require_once $modx->getConfig('base_path').'assets/snippets/ddTools/modx.ddtools.class.php';
-	
-	$geoPos = ddTools::getTemplateVarOutput(array($getField), $getId);
-	$geoPos = $string[$getField];
+if (isset($docField)){
+	$geoPos = ddTools::getTemplateVarOutput(array($docField), $docId);
+	$geoPos = $string[$docField];
 }
 
 //Если координаты заданы и не пустые
@@ -41,12 +47,12 @@ if (!empty($geoPos)){
 	$mapElement = isset($mapElement) ? $mapElement : '#map';
 	
 	//Подключаем библиотеку карт
-	$modx->regClientStartupScript('http://api-maps.yandex.ru/2.0-stable/?load=package.standard&amp;lang=ru-RU', array('name' => 'api-maps.yandex.ru', 'version' => '2.0-stable'));
+	$modx->regClientStartupScript('http://api-maps.yandex.ru/2.1/?lang=ru-RU', array('name' => 'api-maps.yandex.ru', 'version' => '2.1'));
 	//Подключаем $.ddYMap
-	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.2.min.js', array('name' => '$.ddYMap', 'version' => '1.2'));
+	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.3.min.js', array('name' => '$.ddYMap', 'version' => '1.3'));
 	
 	//Инлайн-скрипт инициализации
-	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({latLng: new Array('.$geoPos.')';
+	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({placemarks: new Array('.$geoPos.')';
 	
 	//Если иконка задана
 	if (!empty($icon)){
@@ -70,6 +76,7 @@ if (!empty($geoPos)){
 			}
 			//Позиционируем точку по центру иконки
 			$inlineScript .= ', placemarkOptions: {
+				iconLayout: "default#image",
 				iconImageHref: "'.$icon.'",
 				iconImageSize: ['.$iconSize[0].', '.$iconSize[1].'],
 				iconImageOffset: ['.round($resultIconOffset[0]).', '.round($resultIconOffset[1]).']
@@ -84,7 +91,7 @@ if (!empty($geoPos)){
 	//Тип карты по умолчанию
 	if (!empty($defaultType)){$inlineScript .= ', defaultType: "'.$defaultType.'"';}
 	//Масштаб карты по умолчанию
-	if (!empty($defaultZoom)){$inlineScript .= ', zoom: '.$defaultZoom;}
+	if (!empty($defaultZoom)){$inlineScript .= ', defaultZoom: '.$defaultZoom;}
 	//Если указано смещение центра карты
 	if (isset($mapCenterOffset)){$inlineScript .= ', mapCenterOffset: new Array('.$mapCenterOffset.')';} 
 	
