@@ -1,7 +1,7 @@
 <?php
 /**
  * ddYMap.php
- * @version 1.4.1 (2014-07-24)
+ * @version 1.4.2 (2014-08-14)
  * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
@@ -21,7 +21,7 @@
  * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
  * @param $mapCenterOffset {comma separated string} - Center offset of the map with respect to the center of the map container in pixels. Default: '0,0'.
  * 
- * @link http://code.divandesign.biz/modx/ddymap/1.4.1
+ * @link http://code.divandesign.biz/modx/ddymap/1.4.2
  * 
  * @copyright 2014, DivanDesign
  * http://www.DivanDesign.biz
@@ -39,7 +39,7 @@ extract(ddTools::verifyRenamedParams($params, array(
 //Если задано имя поля, которое необходимо получить
 if (isset($docField)){
 	$geoPos = ddTools::getTemplateVarOutput(array($docField), $docId);
-	$geoPos = $string[$docField];
+	$geoPos = $geoPos[$docField];
 }
 
 //Если координаты заданы и не пустые
