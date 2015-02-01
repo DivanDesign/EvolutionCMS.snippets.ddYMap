@@ -1,7 +1,7 @@
 <?php
 /**
  * ddYMap.php
- * @version 1.4.2 (2014-08-14)
+ * @version 1.5 (2015-02-01)
  * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
@@ -20,10 +20,11 @@
  * @param $iconOffset {comma separated string} - An offset of the icon in pixels (x, y).Basic position: the icon is horizontally centered with respect to x and its bottom position is y. Default: '0,0'.
  * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
  * @param $mapCenterOffset {comma separated string} - Center offset of the map with respect to the center of the map container in pixels. Default: '0,0'.
+ * @param $lang {'ru_RU'; 'en_US'; 'ru_UA'; 'uk_UA'; 'tr_TR'} - Map language — locale ID. See http://api.yandex.com/maps/doc/jsapi/2.x/dg/concepts/load.xml for more information. Default: 'ru_RU'.
  * 
- * @link http://code.divandesign.biz/modx/ddymap/1.4.2
+ * @link http://code.divandesign.biz/modx/ddymap/1.5
  * 
- * @copyright 2014, DivanDesign
+ * @copyright 2015, DivanDesign
  * http://www.DivanDesign.biz
  */
 
@@ -44,10 +45,11 @@ if (isset($docField)){
 
 //Если координаты заданы и не пустые
 if (!empty($geoPos)){
-	$mapElement = isset($mapElement) ? $mapElement : '#map';
+	if (empty($lang)){$lang = 'ru_RU';}
+	if (empty($mapElement)){$mapElement = '#map';}
 	
 	//Подключаем библиотеку карт
-	$modx->regClientStartupScript('http://api-maps.yandex.ru/2.1/?lang=ru-RU', array('name' => 'api-maps.yandex.ru', 'version' => '2.1'));
+	$modx->regClientStartupScript('http://api-maps.yandex.ru/2.1/?lang='.$lang, array('name' => 'api-maps.yandex.ru', 'version' => '2.1'));
 	//Подключаем $.ddYMap
 	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.3.1.min.js', array('name' => '$.ddYMap', 'version' => '1.3.1'));
 	
