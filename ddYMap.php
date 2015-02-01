@@ -1,7 +1,7 @@
 <?php
 /**
  * ddYMap.php
- * @version 1.4.2 (2014-08-14)
+ * @version 1.5 (2015-02-01)
  * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
@@ -22,9 +22,9 @@
  * @param $mapCenterOffset {comma separated string} - Center offset of the map with respect to the center of the map container in pixels. Default: '0,0'.
  * @param $lang {'ru_RU'; 'en_US'; 'ru_UA'; 'uk_UA'; 'tr_TR'} - Map language — locale ID. See http://api.yandex.com/maps/doc/jsapi/2.x/dg/concepts/load.xml for more information. Default: 'ru_RU'.
  * 
- * @link http://code.divandesign.biz/modx/ddymap/1.4.2
+ * @link http://code.divandesign.biz/modx/ddymap/1.5
  * 
- * @copyright 2014, DivanDesign
+ * @copyright 2015, DivanDesign
  * http://www.DivanDesign.biz
  */
 
