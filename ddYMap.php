@@ -43,11 +43,10 @@ if (isset($docField)){
 	$geoPos = $geoPos[$docField];
 }
 
-if (empty($lang)){$lang = 'ru_RU';}
-
 //Если координаты заданы и не пустые
 if (!empty($geoPos)){
-	$mapElement = isset($mapElement) ? $mapElement : '#map';
+	if (empty($lang)){$lang = 'ru_RU';}
+	if (empty($mapElement)){$mapElement = '#map';}
 	
 	//Подключаем библиотеку карт
 	$modx->regClientStartupScript('http://api-maps.yandex.ru/2.1/?lang='.$lang, array('name' => 'api-maps.yandex.ru', 'version' => '2.1'));
