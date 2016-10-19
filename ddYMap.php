@@ -54,7 +54,7 @@ if (!empty($geoPos)){
 	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.3.1.min.js', array('name' => '$.ddYMap', 'version' => '1.3.1'));
 	
 	//Инлайн-скрипт инициализации
-	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({placemarks: new Array('.$geoPos.')';
+	$inlineScript = '(function($){$(function(){$("#'.$mapElement.'").ddYMap({placemarks: new Array('.$geoPos.')';
 	
 	//Если иконка задана
 	if (!empty($icon)){
