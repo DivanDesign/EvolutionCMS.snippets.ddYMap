@@ -49,7 +49,7 @@ if (!empty($geoPos)){
 	if (empty($mapElement)){$mapElement = '#map';}
 	
 	//Подключаем библиотеку карт
-	$modx->regClientStartupScript('http://api-maps.yandex.ru/2.1/?lang='.$lang, array('name' => 'api-maps.yandex.ru', 'version' => '2.1'));
+	$modx->regClientStartupScript('//api-maps.yandex.ru/2.1/?lang='.$lang, array('name' => 'api-maps.yandex.ru', 'version' => '2.1'));
 	//Подключаем $.ddYMap
 	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.4.min.js', array('name' => '$.ddYMap', 'version' => '1.4'));
 	
