@@ -1,6 +1,6 @@
 <?php
 /**
- * ddYMap.php
+ * ddYMap
  * @version 1.5 (2015-02-01)
  * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
@@ -24,8 +24,7 @@
  * 
  * @link http://code.divandesign.biz/modx/ddymap/1.5
  * 
- * @copyright 2015, DivanDesign
- * http://www.DivanDesign.biz
+ * @copyright 2015–2017 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
 //Подключаем modx.ddTools
