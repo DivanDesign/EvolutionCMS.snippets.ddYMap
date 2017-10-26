@@ -21,6 +21,7 @@
  * @param $scrollZoom {0; 1} - Allow zoom while scrolling. Default: 0.
  * @param $mapCenterOffset {comma separated string} - Center offset of the map with respect to the center of the map container in pixels. Default: '0,0'.
  * @param $lang {'ru_RU'; 'en_US'; 'ru_UA'; 'uk_UA'; 'tr_TR'} - Map language — locale ID. See http://api.yandex.com/maps/doc/jsapi/2.x/dg/concepts/load.xml for more information. Default: 'ru_RU'.
+ * @param $scriptsLocation {'head'; 'body';} - The tag where jQuery scripts are included. Default: 'head'.
  * 
  * @link http://code.divandesign.biz/modx/ddymap/1.5
  * 
@@ -42,15 +43,13 @@ if (isset($docField)){
 	$geoPos = $geoPos[$docField];
 }
 
+//Где должны быть подключены скрипты
+$scriptsLocation = isset($scriptsLocation) ? $scriptsLocation : 'head';
+
 //Если координаты заданы и не пустые
 if (!empty($geoPos)){
 	if (empty($lang)){$lang = 'ru_RU';}
 	if (empty($mapElement)){$mapElement = '#map';}
-	
-	//Подключаем библиотеку карт
-	$modx->regClientStartupScript('//api-maps.yandex.ru/2.1/?lang='.$lang, array('name' => 'api-maps.yandex.ru', 'version' => '2.1'));
-	//Подключаем $.ddYMap
-	$modx->regClientStartupScript($modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.4.min.js', array('name' => '$.ddYMap', 'version' => '1.4'));
 	
 	//Инлайн-скрипт инициализации
 	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({placemarks: new Array('.$geoPos.')';
@@ -98,7 +97,20 @@ if (!empty($geoPos)){
 	
 	$inlineScript .= '});});})(jQuery);';
 	
-	//Подключаем инлайн-скрипт с инициализацией
-	$modx->regClientStartupScript('<script type="text/javascript">'.$inlineScript.'</script>', array('plaintext' => true));
+	if ($scriptsLocation == 'head') {
+		//Подключаем библиотеку карт
+		$modx->regClientStartupScript('//api-maps.yandex.ru/2.1/?lang=' . $lang, array('name' => 'api-maps.yandex.ru', 'version' => '2.1'));
+		//Подключаем $.ddYMap
+		$modx->regClientStartupScript($modx->getConfig('site_url') . 'assets/js/jquery.ddYMap-1.4.min.js', array('name' => '$.ddYMap', 'version' => '1.4'));
+		//Подключаем инлайн-скрипт с инициализацией
+		$modx->regClientStartupScript('<script type="text/javascript">'.$inlineScript.'</script>', array('plaintext' => true));
+	}else{
+		//Подключаем библиотеку карт
+		$modx->regClientScript("<script defer type='text/javascript' src='//api-maps.yandex.ru/2.1/?lang=" . $lang . "'></script>", array('name' => 'api-maps.yandex.ru', 'version' => '2.1'));
+		//Подключаем $.ddYMap
+		$modx->regClientScript("<script defer type='text/javascript' src='" . $modx->getConfig('site_url') . "assets/js/jquery.ddYMap-1.4.min.js'></script>", array('name' => '$.ddYMap', 'version' => '1.4'));
+		//Подключаем инлайн-скрипт с инициализацией
+		$modx->regClientScript("<script defer type='text/javascript'>".$inlineScript."</script>", array('plaintext' => true));
+	}
 }
 ?>
