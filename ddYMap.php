@@ -1,7 +1,7 @@
 <?php
 /**
  * ddYMap
- * @version 1.5 (2015-02-01)
+ * @version 1.6 (2017-11-28)
  * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
@@ -23,7 +23,7 @@
  * @param $lang {'ru_RU'; 'en_US'; 'ru_UA'; 'uk_UA'; 'tr_TR'} - Map language — locale ID. See http://api.yandex.com/maps/doc/jsapi/2.x/dg/concepts/load.xml for more information. Default: 'ru_RU'.
  * @param $scriptsLocation {'head'; 'body';} - The tag where jQuery scripts are included. Default: 'head'.
  * 
- * @link http://code.divandesign.biz/modx/ddymap/1.5
+ * @link http://code.divandesign.biz/modx/ddymap/1.6
  * 
  * @copyright 2015–2017 DivanDesign {@link http://www.DivanDesign.biz }
  */
