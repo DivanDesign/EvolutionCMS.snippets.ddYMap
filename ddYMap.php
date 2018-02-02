@@ -5,6 +5,7 @@
  * 
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
+ * @uses PHP >= 5.4.
  * @uses MODXEvo.libraries.ddTools >= 0.12 {@link http://code.divandesign.biz/modx/ddtools }.
  * 
  * @note Attention! The jQuery library should be included on the page.
@@ -32,15 +33,15 @@
 require_once $modx->getConfig('base_path').'assets/snippets/ddTools/modx.ddtools.class.php';
 
 //Backward compatibility
-extract(ddTools::verifyRenamedParams($params, array(
+extract(ddTools::verifyRenamedParams($params, [
 	'docField' => 'getField',
 	'docId' => 'getId'
-)));
+]));
 
 //Если задано имя поля, которое необходимо получить
 if (isset($docField)){
 	$geoPos = ddTools::getTemplateVarOutput(
-		array($docField),
+		[$docField],
 		$docId
 	);
 	$geoPos = $geoPos[$docField];
@@ -70,10 +71,10 @@ if (!empty($geoPos)){
 			$iconSize = getimagesize($icon);
 			
 			//если смещение не задано сделаем над опорной точкой ценруя по ширине
-			$resultIconOffset = array(
+			$resultIconOffset = [
 				$iconSize[0] / -2,
 				$iconSize[1] * -1
-			);
+			];
 			if (!empty($iconOffset)){
 				$iconOffset = explode(',', $iconOffset);
 				//если задано сделает относительно положения по умолчанию
@@ -112,45 +113,45 @@ if (!empty($geoPos)){
 		//Подключаем библиотеку карт
 		$modx->regClientStartupScript(
 			'//api-maps.yandex.ru/2.1/?lang='.$lang,
-			array(
+			[
 				'name' => 'api-maps.yandex.ru',
 				'version' => '2.1'
-			)
+			]
 		);
 		//Подключаем $.ddYMap
 		$modx->regClientStartupScript(
 			$modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.4.min.js',
-			array(
+			[
 				'name' => '$.ddYMap',
 				'version' => '1.4'
-			)
+			]
 		);
 		//Подключаем инлайн-скрипт с инициализацией
 		$modx->regClientStartupScript(
 			'<script type="text/javascript">'.$inlineScript.'</script>',
-			array('plaintext' => true)
+			['plaintext' => true]
 		);
 	}else{
 		//Подключаем библиотеку карт
 		$modx->regClientScript(
 			'<script defer type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang='.$lang.'"></script>',
-			array(
+			[
 				'name' => 'api-maps.yandex.ru',
 				'version' => '2.1'
-			)
+			]
 		);
 		//Подключаем $.ddYMap
 		$modx->regClientScript(
 			'<script defer type="text/javascript" src="'.$modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.4.min.js"></script>',
-			array(
+			[
 				'name' => '$.ddYMap',
 				'version' => '1.4'
-			)
+			]
 		);
 		//Подключаем инлайн-скрипт с инициализацией
 		$modx->regClientScript(
 			'<script defer type="text/javascript">'.$inlineScript.'</script>',
-			array('plaintext' => true)
+			['plaintext' => true]
 		);
 	}
 }
