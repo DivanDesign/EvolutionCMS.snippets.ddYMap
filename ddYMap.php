@@ -6,7 +6,7 @@
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
  * @uses PHP >= 5.4.
- * @uses MODXEvo.libraries.ddTools >= 0.12 {@link http://code.divandesign.biz/modx/ddtools }.
+ * @uses MODXEvo.libraries.ddTools >= 0.21 {@link http://code.divandesign.biz/modx/ddtools }.
  * 
  * @note Attention! The jQuery library should be included on the page.
  * @note From the pair of “$geoPos” / “$docField” parameters one is required.
@@ -29,8 +29,8 @@
  * @copyright 2015–2017 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
-//Подключаем modx.ddTools
-require_once $modx->getConfig('base_path').'assets/snippets/ddTools/modx.ddtools.class.php';
+//Include MODXEvo.libraries.ddTools
+require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php';
 
 //Backward compatibility
 extract(ddTools::verifyRenamedParams($params, [
