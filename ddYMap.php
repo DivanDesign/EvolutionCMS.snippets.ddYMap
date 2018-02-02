@@ -9,11 +9,11 @@
  * @uses MODXEvo.libraries.ddTools >= 0.21 {@link http://code.divandesign.biz/modx/ddtools }.
  * 
  * @note Attention! The jQuery library should be included on the page.
- * @note From the pair of “$geoPos” / “$docField” parameters one is required.
+ * @note From the pair of “$geoPos” / “$geoPos_docField” parameters one is required.
  * 
  * @param $geoPos {string_commaSeparated} — Comma separated longitude and latitude. @required
- * @param $docField {string} — A field name with position that is required to be got.
- * @param $docId {integer} — Document ID with a field value needed to be received. Default: current document.
+ * @param $geoPos_docField {string} — A field name with position that is required to be got.
+ * @param $geoPos_docId {integer} — Document ID with a field value needed to be received. Default: current document.
  * @param $mapElement {string} — Container selector which the map is required to be embed in. Default: '#map'.
  * @param $defaultType {'map'|'satellite'|'hybrid'|'publicMap'|'publicMapHybrid'} — Default map type: 'map' — schematic map, 'satellite' — satellite map, 'hybrid' — hybrid map, 'publicMap' — public map, 'publicMapHybrid' - hybrid public map. Default: 'map'.
  * @param $defaultZoom {integer} — Default map zoom. Default: 15.
@@ -34,17 +34,17 @@ require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.cla
 
 //Backward compatibility
 extract(ddTools::verifyRenamedParams($params, [
-	'docField' => 'getField',
-	'docId' => 'getId'
+	'geoPos_docField' => ['docField', 'getField'],
+	'geoPos_docId' => ['docId', 'getId']
 ]));
 
 //Если задано имя поля, которое необходимо получить
-if (isset($docField)){
+if (isset($geoPos_docField)){
 	$geoPos = ddTools::getTemplateVarOutput(
-		[$docField],
-		$docId
+		[$geoPos_docField],
+		$geoPos_docId
 	);
-	$geoPos = $geoPos[$docField];
+	$geoPos = $geoPos[$geoPos_docField];
 }
 
 //Где должны быть подключены скрипты
