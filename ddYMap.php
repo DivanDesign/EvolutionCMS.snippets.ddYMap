@@ -52,7 +52,7 @@ if (!empty($geoPos)){
 	if (empty($mapElement)){$mapElement = '#map';}
 	
 	//Инлайн-скрипт инициализации
-	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({placemarks: new Array('.$geoPos.')';
+	$inlineScript = '(function($){$(function(){$("#'.$mapElement.'").ddYMap({placemarks: new Array('.$geoPos.')';
 	
 	//Если иконка задана
 	if (!empty($icon)){
