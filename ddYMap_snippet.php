@@ -6,7 +6,7 @@
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
  * @uses PHP >= 5.4.
- * @uses MODXEvo.libraries.ddTools >= 0.21 {@link http://code.divandesign.biz/modx/ddtools }.
+ * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.21 {@link http://code.divandesign.biz/modx/ddtools }.
  * 
  * @note Attention! The jQuery library should be included on the page.
  * @note From the pair of “$geoPos” / “$geoPos_docField” parameters one is required.
@@ -29,14 +29,17 @@
  * @copyright 2015–2018 DivanDesign {@link http://www.DivanDesign.biz }
  */
 
-//Include MODXEvo.libraries.ddTools
-require_once $modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php';
+//Include (MODX)EvolutionCMS.libraries.ddTools
+require_once($modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php');
 
 //Backward compatibility
-extract(ddTools::verifyRenamedParams($params, [
-	'geoPos_docField' => ['docField', 'getField'],
-	'geoPos_docId' => ['docId', 'getId']
-]));
+extract(ddTools::verifyRenamedParams(
+	$params,
+	[
+		'geoPos_docField' => ['docField', 'getField'],
+		'geoPos_docId' => ['docId', 'getId']
+	]
+));
 
 //Если задано имя поля, которое необходимо получить
 if (isset($geoPos_docField)){
@@ -61,10 +64,16 @@ if (!empty($geoPos)){
 	//Если иконка задана
 	if (!empty($icon)){
 		//путь иконки на сервере
-		$icon = ltrim($icon, '/');
+		$icon = ltrim(
+			$icon,
+			'/'
+		);
 		
 		//Пытаемся открыть файл
-		$iconHandle = @fopen($icon, 'r');
+		$iconHandle = @fopen(
+			$icon,
+			'r'
+		);
 		
 		if ($iconHandle){
 			//Получим её размеры
@@ -76,7 +85,10 @@ if (!empty($geoPos)){
 				$iconSize[1] * -1
 			];
 			if (!empty($iconOffset)){
-				$iconOffset = explode(',', $iconOffset);
+				$iconOffset = explode(
+					',',
+					$iconOffset
+				);
 				//если задано сделает относительно положения по умолчанию
 				$resultIconOffset[0] += $iconOffset[0];
 				$resultIconOffset[1] += $iconOffset[1];
@@ -109,7 +121,7 @@ if (!empty($geoPos)){
 	
 	$inlineScript .= '});});})(jQuery);';
 	
-	if ($scriptsLocation == 'head') {
+	if ($scriptsLocation == 'head'){
 		//Подключаем библиотеку карт
 		$modx->regClientStartupScript(
 			'//api-maps.yandex.ru/2.1/?lang='.$lang,
