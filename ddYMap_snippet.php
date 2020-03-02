@@ -30,14 +30,23 @@
  */
 
 //Include (MODX)EvolutionCMS.libraries.ddTools
-require_once($modx->getConfig('base_path').'assets/libs/ddTools/modx.ddtools.class.php');
+require_once(
+	$modx->getConfig('base_path') .
+	'assets/libs/ddTools/modx.ddtools.class.php'
+);
 
 //Backward compatibility
 extract(ddTools::verifyRenamedParams(
 	$params,
 	[
-		'geoPos_docField' => ['docField', 'getField'],
-		'geoPos_docId' => ['docId', 'getId']
+		'geoPos_docField' => [
+			'docField',
+			'getField'
+		],
+		'geoPos_docId' => [
+			'docId',
+			'getId'
+		]
 	]
 ));
 
@@ -51,15 +60,29 @@ if (isset($geoPos_docField)){
 }
 
 //Где должны быть подключены скрипты
-$scriptsLocation = isset($scriptsLocation) ? $scriptsLocation : 'head';
+$scriptsLocation =
+	isset($scriptsLocation) ?
+	$scriptsLocation :
+	'head'
+;
 
 //Если координаты заданы и не пустые
 if (!empty($geoPos)){
-	if (empty($lang)){$lang = 'ru_RU';}
-	if (empty($mapElement)){$mapElement = '#map';}
+	if (empty($lang)){
+		$lang = 'ru_RU';
+	}
+	if (empty($mapElement)){
+		$mapElement = '#map';
+	}
 	
 	//Инлайн-скрипт инициализации
-	$inlineScript = '(function($){$(function(){$("'.$mapElement.'").ddYMap({placemarks: new Array('.$geoPos.')';
+	$inlineScript =
+		'(function($){$(function(){$("' .
+		$mapElement .
+		'").ddYMap({placemarks: new Array(' .
+		$geoPos .
+		')'
+	;
 	
 	//Если иконка задана
 	if (!empty($icon)){
@@ -96,9 +119,9 @@ if (!empty($geoPos)){
 			//Позиционируем точку по центру иконки
 			$inlineScript .= ', placemarkOptions: {
 				iconLayout: "default#image",
-				iconImageHref: "'.$icon.'",
-				iconImageSize: ['.$iconSize[0].', '.$iconSize[1].'],
-				iconImageOffset: ['.round($resultIconOffset[0]).', '.round($resultIconOffset[1]).']
+				iconImageHref: "' . $icon . '",
+				iconImageSize: [' . $iconSize[0] . ', ' . $iconSize[1] . '],
+				iconImageOffset: [' . round($resultIconOffset[0]) . ', ' . round($resultIconOffset[1]) . ']
 			}';
 			
 			fclose($iconHandle);
@@ -113,18 +136,24 @@ if (!empty($geoPos)){
 		$inlineScript .= ', scrollZoom: true';
 	}
 	//Тип карты по умолчанию
-	if (!empty($defaultType)){$inlineScript .= ', defaultType: "'.$defaultType.'"';}
+	if (!empty($defaultType)){
+		$inlineScript .= ', defaultType: "' . $defaultType . '"';
+	}
 	//Масштаб карты по умолчанию
-	if (!empty($defaultZoom)){$inlineScript .= ', defaultZoom: '.$defaultZoom;}
+	if (!empty($defaultZoom)){
+		$inlineScript .= ', defaultZoom: ' . $defaultZoom;
+	}
 	//Если указано смещение центра карты
-	if (isset($mapCenterOffset)){$inlineScript .= ', mapCenterOffset: new Array('.$mapCenterOffset.')';} 
+	if (isset($mapCenterOffset)){
+		$inlineScript .= ', mapCenterOffset: new Array(' . $mapCenterOffset . ')';
+	} 
 	
 	$inlineScript .= '});});})(jQuery);';
 	
 	if ($scriptsLocation == 'head'){
 		//Подключаем библиотеку карт
 		$modx->regClientStartupScript(
-			'//api-maps.yandex.ru/2.1/?lang='.$lang,
+			'//api-maps.yandex.ru/2.1/?lang=' . $lang,
 			[
 				'name' => 'api-maps.yandex.ru',
 				'version' => '2.1'
@@ -132,7 +161,7 @@ if (!empty($geoPos)){
 		);
 		//Подключаем $.ddYMap
 		$modx->regClientStartupScript(
-			$modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.4.min.js',
+			$modx->getConfig('site_url') . 'assets/js/jquery.ddYMap-1.4.min.js',
 			[
 				'name' => '$.ddYMap',
 				'version' => '1.4'
@@ -140,13 +169,15 @@ if (!empty($geoPos)){
 		);
 		//Подключаем инлайн-скрипт с инициализацией
 		$modx->regClientStartupScript(
-			'<script type="text/javascript">'.$inlineScript.'</script>',
-			['plaintext' => true]
+			'<script type="text/javascript">' . $inlineScript . '</script>',
+			[
+				'plaintext' => true
+			]
 		);
 	}else{
 		//Подключаем библиотеку карт
 		$modx->regClientScript(
-			'<script defer type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang='.$lang.'"></script>',
+			'<script defer type="text/javascript" src="//api-maps.yandex.ru/2.1/?lang=' . $lang . '"></script>',
 			[
 				'name' => 'api-maps.yandex.ru',
 				'version' => '2.1'
@@ -154,7 +185,7 @@ if (!empty($geoPos)){
 		);
 		//Подключаем $.ddYMap
 		$modx->regClientScript(
-			'<script defer type="text/javascript" src="'.$modx->getConfig('site_url').'assets/js/jquery.ddYMap-1.4.min.js"></script>',
+			'<script defer type="text/javascript" src="' . $modx->getConfig('site_url') . 'assets/js/jquery.ddYMap-1.4.min.js"></script>',
 			[
 				'name' => '$.ddYMap',
 				'version' => '1.4'
@@ -162,8 +193,10 @@ if (!empty($geoPos)){
 		);
 		//Подключаем инлайн-скрипт с инициализацией
 		$modx->regClientScript(
-			'<script defer type="text/javascript">'.$inlineScript.'</script>',
-			['plaintext' => true]
+			'<script defer type="text/javascript">' . $inlineScript . '</script>',
+			[
+				'plaintext' => true
+			]
 		);
 	}
 }
