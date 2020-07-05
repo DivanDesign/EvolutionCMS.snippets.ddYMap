@@ -24,10 +24,12 @@
  * @param $lang {'ru_RU'|'en_US'|'ru_UA'|'uk_UA'|'tr_TR'} — Map language — locale ID. See http://api.yandex.com/maps/doc/jsapi/2.x/dg/concepts/load.xml for more information. Default: 'ru_RU'.
  * @param $scriptsLocation {'head'|'body'} — The tag where jQuery scripts are included. Default: 'head'.
  * 
- * @link http://code.divandesign.biz/modx/ddymap/1.6.1
+ * @link https://code.divandesign.biz/modx/ddymap
  * 
- * @copyright 2015–2018 DivanDesign {@link http://www.DivanDesign.biz }
+ * @copyright 2015–2018 DD Group {@link https://DivanDesign.biz }
  */
+
+global $modx;
 
 //Include (MODX)EvolutionCMS.libraries.ddTools
 require_once(
@@ -36,7 +38,7 @@ require_once(
 );
 
 //Backward compatibility
-extract(ddTools::verifyRenamedParams(
+extract(\ddTools::verifyRenamedParams(
 	$params,
 	[
 		'geoPos_docField' => [
@@ -52,8 +54,10 @@ extract(ddTools::verifyRenamedParams(
 
 //Если задано имя поля, которое необходимо получить
 if (isset($geoPos_docField)){
-	$geoPos = ddTools::getTemplateVarOutput(
-		[$geoPos_docField],
+	$geoPos = \ddTools::getTemplateVarOutput(
+		[
+			$geoPos_docField
+		],
 		$geoPos_docId
 	);
 	$geoPos = $geoPos[$geoPos_docField];
@@ -71,6 +75,7 @@ if (!empty($geoPos)){
 	if (empty($lang)){
 		$lang = 'ru_RU';
 	}
+	
 	if (empty($mapElement)){
 		$mapElement = '#map';
 	}
@@ -135,14 +140,17 @@ if (!empty($geoPos)){
 	){
 		$inlineScript .= ', scrollZoom: true';
 	}
+	
 	//Тип карты по умолчанию
 	if (!empty($defaultType)){
 		$inlineScript .= ', defaultType: "' . $defaultType . '"';
 	}
+	
 	//Масштаб карты по умолчанию
 	if (!empty($defaultZoom)){
 		$inlineScript .= ', defaultZoom: ' . $defaultZoom;
 	}
+	
 	//Если указано смещение центра карты
 	if (isset($mapCenterOffset)){
 		$inlineScript .= ', mapCenterOffset: new Array(' . $mapCenterOffset . ')';
