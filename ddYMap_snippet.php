@@ -6,7 +6,7 @@
  * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
  * 
  * @uses PHP >= 5.4.
- * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.21 {@link http://code.divandesign.biz/modx/ddtools }.
+ * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.40.1 (not tested with older versions) {@link http://code.divandesign.biz/modx/ddtools }.
  * 
  * @note Attention! The jQuery library should be included on the page.
  * @note From the pair of “$geoPos” / “$geoPos_docField” parameters one is required.
@@ -38,9 +38,9 @@ require_once(
 );
 
 //Backward compatibility
-extract(\ddTools::verifyRenamedParams(
-	$params,
-	[
+extract(\ddTools::verifyRenamedParams([
+	'params' => $params,
+	'compliance' => [
 		'geoPos_docField' => [
 			'docField',
 			'getField'
@@ -50,7 +50,7 @@ extract(\ddTools::verifyRenamedParams(
 			'getId'
 		]
 	]
-));
+]));
 
 //Если задано имя поля, которое необходимо получить
 if (isset($geoPos_docField)){
