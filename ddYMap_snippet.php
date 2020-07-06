@@ -201,7 +201,7 @@ if (!empty($geoPos)){
 		);
 		//Подключаем инлайн-скрипт с инициализацией
 		$modx->regClientScript(
-			'<script defer type="text/javascript">' . $inlineScript . '</script>',
+			'<script type="text/javascript">' . $inlineScript . '</script>',
 			[
 				'plaintext' => true
 			]
