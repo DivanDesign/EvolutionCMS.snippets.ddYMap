@@ -3,26 +3,7 @@
  * ddYMap
  * @version 1.6.1 (2018-02-02)
  * 
- * @desc A snippet that allows Yandex.Maps to be rendered on a page in a simple way.
- * 
- * @uses PHP >= 5.4.
- * @uses (MODX)EvolutionCMS.libraries.ddTools >= 0.40.1 (not tested with older versions) {@link http://code.divandesign.biz/modx/ddtools }.
- * 
- * @note Attention! The jQuery library should be included on the page.
- * @note From the pair of “$geoPos” / “$geoPos_docField” parameters one is required.
- * 
- * @param $geoPos {string_commaSeparated} — Comma separated longitude and latitude. @required
- * @param $geoPos_docField {string} — A field name with position that is required to be got.
- * @param $geoPos_docId {integer} — Document ID with a field value needed to be received. Default: current document.
- * @param $mapElement {string} — Container selector which the map is required to be embed in. Default: '#map'.
- * @param $defaultType {'map'|'satellite'|'hybrid'|'publicMap'|'publicMapHybrid'} — Default map type: 'map' — schematic map, 'satellite' — satellite map, 'hybrid' — hybrid map, 'publicMap' — public map, 'publicMapHybrid' - hybrid public map. Default: 'map'.
- * @param $defaultZoom {integer} — Default map zoom. Default: 15.
- * @param $icon {string} — An icon to use (relative address). Default: without (default icon).
- * @param $iconOffset {string_commaSeparated} — An offset of the icon in pixels (x, y).Basic position: the icon is horizontally centered with respect to x and its bottom position is y. Default: '0,0'.
- * @param $scrollZoom {0|1} — Allow zoom while scrolling. Default: 0.
- * @param $mapCenterOffset {string_commaSeparated} — Center offset of the map with respect to the center of the map container in pixels. Default: '0,0'.
- * @param $lang {'ru_RU'|'en_US'|'ru_UA'|'uk_UA'|'tr_TR'} — Map language — locale ID. See http://api.yandex.com/maps/doc/jsapi/2.x/dg/concepts/load.xml for more information. Default: 'ru_RU'.
- * @param $scriptsLocation {'head'|'body'} — The tag where jQuery scripts are included. Default: 'head'.
+ * @see README.md
  * 
  * @link https://code.divandesign.biz/modx/ddymap
  * 
