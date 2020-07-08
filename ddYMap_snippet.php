@@ -169,7 +169,7 @@ if (!empty($geoPos)){
 		);
 		//Подключаем $.ddYMap
 		$modx->regClientStartupScript(
-			$modx->getConfig('site_url') . 'assets/js/jquery.ddYMap-1.4.min.js',
+			$modx->getConfig('site_url') . 'assets/js/jQuery.ddYMap-1.4.min.js',
 			[
 				'name' => '$.ddYMap',
 				'version' => '1.4'
@@ -193,7 +193,7 @@ if (!empty($geoPos)){
 		);
 		//Подключаем $.ddYMap
 		$modx->regClientScript(
-			'<script defer type="text/javascript" src="' . $modx->getConfig('site_url') . 'assets/js/jquery.ddYMap-1.4.min.js"></script>',
+			'<script defer type="text/javascript" src="' . $modx->getConfig('site_url') . 'assets/js/jQuery.ddYMap-1.4.min.js"></script>',
 			[
 				'name' => '$.ddYMap',
 				'version' => '1.4'
