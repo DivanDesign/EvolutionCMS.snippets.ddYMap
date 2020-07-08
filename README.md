@@ -22,7 +22,7 @@ It is useful to use the snippet with [mm_ddYMap](https://code.divandesign.biz/mo
 #### 1. Elements → Snippets: Create a new snippet with the following data
 
 1. Snippet name: `ddYMap`.
-2. Description: `<b>1.6.1</b> A snippet that allows Yandex.Maps to be rendered on a page in a simple way.`.
+2. Description: `<b>1.6.2</b> A snippet that allows Yandex.Maps to be rendered on a page in a simple way.`.
 3. Category: `Core`.
 4. Parse DocBlock: `no`.
 5. Snippet code (php): Insert content of the `ddYMap_snippet.php` file from the archive.

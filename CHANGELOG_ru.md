@@ -1,6 +1,18 @@
 # (MODX)EvolutionCMS.snippets.ddYMap changelog
 
 
+## Версия 1.6.2 (2020-07-08)
+* \* Внимание! Требуется (MODX)EvolutionCMS.libraries.ddTools >= 0.40.1 (не тестировался с более ранними версиями).
+* \* Улучшена совместимость с новыми версиями (MODX)EvolutionCMS.libraries.ddTools.
+* \* Атрибут `defer` используется только для внешних скриптов (closes #2).
+* \* Структура файлов репозитория изменена.
+* \+ README.
+* \+ README_ru.
+* \+ CHANGELOG.
+* \+ CHANGELOG_ru.
+* \+ Composer.json.
+
+
 ## Версия 1.6.1 (2018-02-02)
 * \* Внимание! Требуется PHP >= 5.4.
 * \* Внимание! Требуется (MODX)EvolutionCMS.libraries.ddTools >= 0.21.

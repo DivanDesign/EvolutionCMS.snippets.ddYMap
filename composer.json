@@ -1,7 +1,7 @@
 {
 	"name": "dd/evolutioncms-snippets-ddymap",
 	"type": "modxevo-snippet",
-	"version": "1.6.1",
+	"version": "1.6.2",
 	"description": "A snippet that allows Yandex.Maps to be rendered on a page in a simple way.",
 	"keywords": [
 		"modx",

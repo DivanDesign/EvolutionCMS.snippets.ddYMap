@@ -1,13 +1,13 @@
 <?php
 /**
  * ddYMap
- * @version 1.6.1 (2018-02-02)
+ * @version 1.6.1 (2020-07-08)
  * 
  * @see README.md
  * 
  * @link https://code.divandesign.biz/modx/ddymap
  * 
- * @copyright 2015–2018 DD Group {@link https://DivanDesign.biz }
+ * @copyright 2015–2020 DD Group {@link https://DivanDesign.biz }
  */
 
 global $modx;
